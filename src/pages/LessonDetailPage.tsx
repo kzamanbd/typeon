@@ -1,5 +1,5 @@
 import { ArrowLeft, Pause, Play, RotateCcw } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { StatsDisplay } from '../components/StatsDisplay';
 import { TypingArea } from '../components/TypingArea';
@@ -20,6 +20,24 @@ export const LessonDetailPage: React.FC = () => {
     const bestStats = lessonId ? getLessonBestStats(lessonId) : null;
     const lessonCompleted = lessonId ? isLessonCompleted(lessonId) : false;
 
+    const handleComplete = useCallback(
+        (stats: TypingStats) => {
+            setIsCompleted(true);
+            setFinalStats(stats);
+            setIsStarted(false);
+
+            // Save lesson completion
+            if (lessonId) {
+                completeLesson(lessonId, stats);
+            }
+        },
+        [lessonId, completeLesson],
+    );
+
+    const handleProgress = useCallback((_stats: Partial<TypingStats>) => {
+        // Real-time stats are handled by the hook
+    }, []);
+
     const {
         userInput,
         updateInput,
@@ -33,19 +51,8 @@ export const LessonDetailPage: React.FC = () => {
         startTime,
     } = useTyping({
         text: lesson?.content || '',
-        onComplete: stats => {
-            setIsCompleted(true);
-            setFinalStats(stats);
-            setIsStarted(false);
-
-            // Save lesson completion
-            if (lessonId) {
-                completeLesson(lessonId, stats);
-            }
-        },
-        onProgress: _stats => {
-            // Real-time stats are handled by the hook
-        },
+        onComplete: handleComplete,
+        onProgress: handleProgress,
     });
 
     useEffect(() => {

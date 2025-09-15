@@ -22,6 +22,14 @@ export const useTyping = ({ text, onComplete, onProgress }: UseTypingProps) => {
     });
 
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
+    const onProgressRef = useRef(onProgress);
+    const onCompleteRef = useRef(onComplete);
+
+    // Update refs when callbacks change
+    useEffect(() => {
+        onProgressRef.current = onProgress;
+        onCompleteRef.current = onComplete;
+    }, [onProgress, onComplete]);
 
     // Update current text when prop changes
     useEffect(() => {
@@ -64,7 +72,7 @@ export const useTyping = ({ text, onComplete, onProgress }: UseTypingProps) => {
                 accuracy: currentAccuracy,
             }));
 
-            onProgress?.({
+            onProgressRef.current?.({
                 wpm: currentWPM,
                 accuracy: currentAccuracy,
                 timeElapsed,
@@ -72,7 +80,7 @@ export const useTyping = ({ text, onComplete, onProgress }: UseTypingProps) => {
                 totalCharacters: totalChars,
             });
         }
-    }, [state.userInput, state.isActive, state.startTime, state.currentText, onProgress]);
+    }, [state.userInput, state.isActive, state.startTime, state.currentText]);
 
     const startTyping = useCallback(() => {
         const now = Date.now();
@@ -116,7 +124,7 @@ export const useTyping = ({ text, onComplete, onProgress }: UseTypingProps) => {
             if (prev.startTime) {
                 const finalStats = analyzeTyping(prev.currentText, prev.userInput, prev.startTime, now);
 
-                onComplete?.(finalStats);
+                onCompleteRef.current?.(finalStats);
 
                 return {
                     ...newState,
@@ -128,7 +136,7 @@ export const useTyping = ({ text, onComplete, onProgress }: UseTypingProps) => {
 
             return newState;
         });
-    }, [onComplete]);
+    }, []);
 
     const resetTyping = useCallback(() => {
         if (intervalRef.current) {
@@ -149,57 +157,54 @@ export const useTyping = ({ text, onComplete, onProgress }: UseTypingProps) => {
         }));
     }, []);
 
-    const updateInput = useCallback(
-        (input: string) => {
-            setState(prev => {
-                const newState = {
-                    ...prev,
-                    userInput: input,
-                    currentPosition: input.length,
-                };
+    const updateInput = useCallback((input: string) => {
+        setState(prev => {
+            const newState = {
+                ...prev,
+                userInput: input,
+                currentPosition: input.length,
+            };
 
-                // Auto-start typing on first character
-                if (!prev.isActive && input.length === 1 && !prev.startTime) {
-                    const now = Date.now();
-                    newState.isActive = true;
-                    newState.startTime = now;
+            // Auto-start typing on first character
+            if (!prev.isActive && input.length === 1 && !prev.startTime) {
+                const now = Date.now();
+                newState.isActive = true;
+                newState.startTime = now;
 
-                    // Start the interval timer
-                    if (intervalRef.current) {
-                        clearInterval(intervalRef.current);
-                    }
-                    intervalRef.current = setInterval(() => {
-                        // Timer logic is handled in useEffect
-                    }, 100);
+                // Start the interval timer
+                if (intervalRef.current) {
+                    clearInterval(intervalRef.current);
+                }
+                intervalRef.current = setInterval(() => {
+                    // Timer logic is handled in useEffect
+                }, 100);
+            }
+
+            // Auto-complete when text is fully typed
+            if (input.length >= prev.currentText.length && prev.isActive) {
+                const now = Date.now();
+                newState.isActive = false;
+                newState.endTime = now;
+
+                if (intervalRef.current) {
+                    clearInterval(intervalRef.current);
+                    intervalRef.current = null;
                 }
 
-                // Auto-complete when text is fully typed
-                if (input.length >= prev.currentText.length && prev.isActive) {
-                    const now = Date.now();
-                    newState.isActive = false;
-                    newState.endTime = now;
+                if (prev.startTime) {
+                    const finalStats = analyzeTyping(prev.currentText, input, prev.startTime, now);
 
-                    if (intervalRef.current) {
-                        clearInterval(intervalRef.current);
-                        intervalRef.current = null;
-                    }
+                    setTimeout(() => onCompleteRef.current?.(finalStats), 100);
 
-                    if (prev.startTime) {
-                        const finalStats = analyzeTyping(prev.currentText, input, prev.startTime, now);
-
-                        setTimeout(() => onComplete?.(finalStats), 100);
-
-                        newState.wpm = finalStats.wpm;
-                        newState.accuracy = finalStats.accuracy;
-                        newState.errors = finalStats.errors;
-                    }
+                    newState.wpm = finalStats.wpm;
+                    newState.accuracy = finalStats.accuracy;
+                    newState.errors = finalStats.errors;
                 }
+            }
 
-                return newState;
-            });
-        },
-        [onComplete],
-    );
+            return newState;
+        });
+    }, []);
 
     // Cleanup interval on unmount
     useEffect(() => {
