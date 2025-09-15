@@ -6,7 +6,7 @@ import { TypingArea } from '../components/TypingArea';
 import { useProgress } from '../contexts/ProgressContext';
 import { allPracticeTexts, generateRandomText } from '../data/practiceTexts';
 import { useTyping } from '../hooks/useTyping';
-import { PracticeMode, TypingStats } from '../types';
+import type { PracticeMode, TypingStats } from '../types';
 
 export const PracticePage: React.FC = () => {
     const [searchParams] = useSearchParams();
@@ -17,7 +17,7 @@ export const PracticePage: React.FC = () => {
     const [selectedLanguage, setSelectedLanguage] = useState<'english' | 'bengali'>('english');
     const [selectedDuration, setSelectedDuration] = useState<number>(60); // seconds
     const [selectedWordCount, setSelectedWordCount] = useState<number>(50);
-    const [selectedTextId, setSelectedTextId] = useState<string>('');
+    const [_selectedTextId, setSelectedTextId] = useState<string>('');
     const [currentText, setCurrentText] = useState<string>('');
     const [isStarted, setIsStarted] = useState(false);
     const [isCompleted, setIsCompleted] = useState(false);
@@ -197,7 +197,7 @@ export const PracticePage: React.FC = () => {
                             </div>
                         )}
 
-                        {(practiceMode === 'random' || practiceMode === 'timed-test') && (
+                        {practiceMode === 'timed-test' && (
                             <div>
                                 <label className='mb-2 block text-sm font-medium text-gray-700'>Word Count</label>
                                 <select

@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { LessonCard } from '../components/LessonCard';
 import { useProgress } from '../contexts/ProgressContext';
 import { allLessons } from '../data/lessons';
-import { Language, Level } from '../types';
+import type { Language, Level } from '../types';
 
 export const LessonsPage: React.FC = () => {
     const navigate = useNavigate();

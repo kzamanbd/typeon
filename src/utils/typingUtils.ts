@@ -1,4 +1,4 @@
-import { TypingError, TypingStats } from '../types';
+import type { TypingError, TypingStats } from '../types';
 
 export const calculateWPM = (correctCharacters: number, timeElapsedSeconds: number): number => {
     if (timeElapsedSeconds === 0) return 0;

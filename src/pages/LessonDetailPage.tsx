@@ -6,7 +6,7 @@ import { TypingArea } from '../components/TypingArea';
 import { useProgress } from '../contexts/ProgressContext';
 import { getLessonById } from '../data/lessons';
 import { useTyping } from '../hooks/useTyping';
-import { TypingStats } from '../types';
+import type { TypingStats } from '../types';
 
 export const LessonDetailPage: React.FC = () => {
     const { lessonId } = useParams<{ lessonId: string }>();
@@ -43,7 +43,7 @@ export const LessonDetailPage: React.FC = () => {
                 completeLesson(lessonId, stats);
             }
         },
-        onProgress: stats => {
+        onProgress: _stats => {
             // Real-time stats are handled by the hook
         },
     });

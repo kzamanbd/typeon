@@ -1,6 +1,6 @@
 import { Award, Clock, Target, TrendingUp } from 'lucide-react';
 import React from 'react';
-import { TypingStats } from '../types';
+import type { TypingStats } from '../types';
 import { formatTime, getAccuracyLevel, getTypingLevel } from '../utils/typingUtils';
 
 interface StatsDisplayProps {

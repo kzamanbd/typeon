@@ -1,4 +1,4 @@
-import { TypingStats, UserProgress } from '../types';
+import type { TypingStats, UserProgress } from '../types';
 
 const STORAGE_KEYS = {
     USER_PROGRESS: 'typing_master_user_progress',

@@ -88,8 +88,8 @@ export const useTyping = ({ text, onComplete, onProgress }: UseTypingProps) => {
             setState(prev => {
                 if (!prev.isActive || !prev.startTime) return prev;
 
-                const currentTime = Date.now();
-                const timeElapsed = (currentTime - prev.startTime) / 1000;
+                // const currentTime = Date.now();
+                // const timeElapsed = (currentTime - prev.startTime) / 1000;
 
                 return {
                     ...prev,

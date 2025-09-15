@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useProgress } from '../contexts/ProgressContext';
 
 export const HomePage: React.FC = () => {
-    const { overallStats, userProgress } = useProgress();
+    const { overallStats } = useProgress();
 
     const features = [
         {

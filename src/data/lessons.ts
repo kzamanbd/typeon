@@ -1,4 +1,4 @@
-import { Lesson } from '../types';
+import type { Lesson } from '../types';
 
 export const englishLessons: Lesson[] = [
     // Beginner English Lessons

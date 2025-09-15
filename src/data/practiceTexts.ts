@@ -1,4 +1,4 @@
-import { PracticeText } from '../types';
+import type { PracticeText } from '../types';
 
 export const englishPracticeTexts: PracticeText[] = [
     {
