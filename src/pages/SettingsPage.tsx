@@ -68,7 +68,7 @@ export const SettingsPage: React.FC = () => {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'typing-master-settings.json';
+        a.download = 'typeon-settings.json';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);

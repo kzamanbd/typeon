@@ -270,7 +270,7 @@ export const HomePage: React.FC = () => {
             <section className='bg-gray-50 py-20'>
                 <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
                     <div className='mb-16 text-center'>
-                        <h2 className='mb-4 text-4xl font-bold text-gray-900'>Why Choose Typing Master?</h2>
+                        <h2 className='mb-4 text-4xl font-bold text-gray-900'>Why Choose Typeon?</h2>
                         <p className='mx-auto max-w-2xl text-xl text-gray-600'>
                             Experience the most advanced typing platform with features designed for rapid skill
                             development

@@ -1,10 +1,10 @@
 import type { TypingStats, UserProgress } from '../types';
 
 const STORAGE_KEYS = {
-    USER_PROGRESS: 'typing_master_user_progress',
-    LESSON_STATS: 'typing_master_lesson_stats',
-    PRACTICE_STATS: 'typing_master_practice_stats',
-    SETTINGS: 'typing_master_settings',
+    USER_PROGRESS: 'typeon_user_progress',
+    LESSON_STATS: 'typeon_lesson_stats',
+    PRACTICE_STATS: 'typeon_practice_stats',
+    SETTINGS: 'typeon_settings',
 };
 
 export const loadUserProgress = (): UserProgress | null => {
