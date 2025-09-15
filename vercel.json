@@ -1,0 +1,16 @@
+{
+    "buildCommand": "npm ci && npm run build",
+    "devCommand": "npm run dev",
+    "installCommand": "npm ci",
+    "framework": null,
+    "public": false,
+    "env": {
+        "NPM_CONFIG_OPTIONAL": "true"
+    },
+    "build": {
+        "env": {
+            "NPM_CONFIG_OPTIONAL": "true",
+            "SKIP_INSTALL_DEPS": "false"
+        }
+    }
+}
