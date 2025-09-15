@@ -39,7 +39,7 @@ export const LessonCard: React.FC<LessonCardProps> = ({
 
     return (
         <div
-            className={`relative cursor-pointer overflow-hidden rounded-lg border-2 border-gray-200 bg-white shadow-md transition-all duration-200 hover:border-blue-300 hover:shadow-lg ${lesson.isLocked ? 'cursor-not-allowed opacity-60' : ''} ${className} `}
+            className={`relative cursor-pointer overflow-hidden rounded-lg border-2 border-gray-200 bg-white shadow-md transition-all duration-200 hover:border-blue-300 hover:shadow ${lesson.isLocked ? 'cursor-not-allowed opacity-60' : ''} ${className} `}
             onClick={lesson.isLocked ? undefined : onClick}>
             {/* Header */}
             <div className='border-b border-gray-100 p-4'>
