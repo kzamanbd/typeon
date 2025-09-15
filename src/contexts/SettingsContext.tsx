@@ -82,13 +82,50 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
         try {
             const importedSettings = JSON.parse(settingsData);
 
-            // Validate imported settings
-            const validatedSettings = { ...defaultSettings };
-            Object.keys(defaultSettings).forEach(key => {
-                if (key in importedSettings) {
-                    validatedSettings[key as keyof AppSettings] = importedSettings[key];
-                }
-            });
+            // Validate and merge settings with defaults
+            const validatedSettings: AppSettings = {
+                language: importedSettings.language === 'bengali' ? 'bengali' : 'english',
+                theme: importedSettings.theme === 'dark' ? 'dark' : 'light',
+                soundEffects:
+                    typeof importedSettings.soundEffects === 'boolean'
+                        ? importedSettings.soundEffects
+                        : defaultSettings.soundEffects,
+                showTargets:
+                    typeof importedSettings.showTargets === 'boolean'
+                        ? importedSettings.showTargets
+                        : defaultSettings.showTargets,
+                autoAdvance:
+                    typeof importedSettings.autoAdvance === 'boolean'
+                        ? importedSettings.autoAdvance
+                        : defaultSettings.autoAdvance,
+                fontSize: ['small', 'medium', 'large'].includes(importedSettings.fontSize)
+                    ? importedSettings.fontSize
+                    : defaultSettings.fontSize,
+                fontFamily: ['mono', 'sans', 'serif'].includes(importedSettings.fontFamily)
+                    ? importedSettings.fontFamily
+                    : defaultSettings.fontFamily,
+                keyboardLayout: ['qwerty', 'dvorak', 'colemak'].includes(importedSettings.keyboardLayout)
+                    ? importedSettings.keyboardLayout
+                    : defaultSettings.keyboardLayout,
+                practiceMode: ['words', 'sentences', 'paragraphs'].includes(importedSettings.practiceMode)
+                    ? importedSettings.practiceMode
+                    : defaultSettings.practiceMode,
+                difficultyLevel: ['beginner', 'intermediate', 'advanced'].includes(importedSettings.difficultyLevel)
+                    ? importedSettings.difficultyLevel
+                    : defaultSettings.difficultyLevel,
+                showKeyboard:
+                    typeof importedSettings.showKeyboard === 'boolean'
+                        ? importedSettings.showKeyboard
+                        : defaultSettings.showKeyboard,
+                highlightErrors:
+                    typeof importedSettings.highlightErrors === 'boolean'
+                        ? importedSettings.highlightErrors
+                        : defaultSettings.highlightErrors,
+                pauseOnError:
+                    typeof importedSettings.pauseOnError === 'boolean'
+                        ? importedSettings.pauseOnError
+                        : defaultSettings.pauseOnError,
+            };
 
             setSettings(validatedSettings);
             saveSettings(validatedSettings);

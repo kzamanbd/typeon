@@ -214,7 +214,7 @@ export const HomePage: React.FC = () => {
                         <div className='flex flex-col items-center justify-center gap-4 sm:flex-row'>
                             <Link
                                 to='/lessons'
-                                className='group flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 px-8 py-4 font-semibold text-white shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl'>
+                                className='group flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 px-8 py-4 font-semibold text-white shadow transition-all duration-300 hover:scale-105 hover:shadow-2xl'>
                                 <Keyboard size={20} />
                                 <span>Start Learning Now</span>
                                 <ArrowRight className='transition-transform group-hover:translate-x-1' size={20} />
@@ -379,7 +379,7 @@ export const HomePage: React.FC = () => {
                     <div className='flex flex-col justify-center gap-4 sm:flex-row'>
                         <Link
                             to='/lessons'
-                            className='rounded-full bg-white px-8 py-4 font-bold text-blue-600 shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl'>
+                            className='rounded-full bg-white px-8 py-4 font-bold text-blue-600 shadow transition-all duration-300 hover:scale-105 hover:shadow-2xl'>
                             Start Learning Free
                         </Link>
                         <Link

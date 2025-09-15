@@ -1,3 +1,4 @@
+import type { AppSettings } from '../contexts/SettingsContext';
 import type { TypingStats, UserProgress } from '../types';
 
 const STORAGE_KEYS = {
@@ -94,31 +95,17 @@ export const savePracticeSession = (stats: TypingStats): void => {
     }
 };
 
-export const loadSettings = () => {
+export const loadSettings = (): Partial<AppSettings> => {
     try {
         const data = localStorage.getItem(STORAGE_KEYS.SETTINGS);
-        return data
-            ? JSON.parse(data)
-            : {
-                  language: 'english',
-                  theme: 'light',
-                  soundEffects: true,
-                  showTargets: true,
-                  autoAdvance: false,
-              };
+        return data ? JSON.parse(data) : {};
     } catch (error) {
         console.error('Error loading settings:', error);
-        return {
-            language: 'english',
-            theme: 'light',
-            soundEffects: true,
-            showTargets: true,
-            autoAdvance: false,
-        };
+        return {};
     }
 };
 
-export const saveSettings = (settings: any): void => {
+export const saveSettings = (settings: AppSettings): void => {
     try {
         localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settings));
     } catch (error) {
