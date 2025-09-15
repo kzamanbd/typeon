@@ -25,6 +25,10 @@ function Layout() {
 // Router configuration using React Router 7 patterns
 const router = createBrowserRouter([
     {
+        path: '/login',
+        element: <LoginPage />,
+    },
+    {
         path: '/',
         element: <Layout />,
         errorElement: <NotFoundPage />,
@@ -52,10 +56,6 @@ const router = createBrowserRouter([
             {
                 path: 'settings',
                 element: <SettingsPage />,
-            },
-            {
-                path: 'login',
-                element: <LoginPage />,
             },
         ],
     },

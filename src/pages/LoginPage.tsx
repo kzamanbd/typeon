@@ -47,7 +47,7 @@ export const LoginPage: React.FC = () => {
 
     return (
         <div className='flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4'>
-            <div className='w-full max-w-sm'>
+            <div className='m-4 w-full max-w-md'>
                 <div className='rounded-2xl bg-white p-8 shadow'>
                     {/* Header */}
                     <div className='text-center'>
