@@ -11,6 +11,9 @@ importers:
       '@tailwindcss/forms':
         specifier: ^0.5.10
         version: 0.5.10(tailwindcss@4.1.13)
+      '@tailwindcss/vite':
+        specifier: ^4.1.13
+        version: 4.1.13(vite@7.1.5(@types/node@24.4.0)(jiti@2.5.1)(lightningcss@1.30.1))
       '@types/react-router-dom':
         specifier: ^5.3.3
         version: 5.3.3
@@ -29,27 +32,27 @@ importers:
       react-router-dom:
         specifier: ^7.9.1
         version: 7.9.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      tailwindcss:
+        specifier: ^4.1.13
+        version: 4.1.13
     devDependencies:
       '@eslint/js':
-        specifier: ^9.33.0
+        specifier: ^9.35.0
         version: 9.35.0
-      '@tailwindcss/vite':
-        specifier: ^4.1.13
-        version: 4.1.13(vite@7.1.5(@types/node@24.4.0)(jiti@2.5.1)(lightningcss@1.30.1))
       '@types/node':
         specifier: ^24.4.0
         version: 24.4.0
       '@types/react':
-        specifier: ^19.1.10
+        specifier: ^19.1.13
         version: 19.1.13
       '@types/react-dom':
-        specifier: ^19.1.7
+        specifier: ^19.1.9
         version: 19.1.9(@types/react@19.1.13)
       '@vitejs/plugin-react-swc':
-        specifier: ^4.0.0
+        specifier: ^4.0.1
         version: 4.0.1(vite@7.1.5(@types/node@24.4.0)(jiti@2.5.1)(lightningcss@1.30.1))
       eslint:
-        specifier: ^9.33.0
+        specifier: ^9.35.0
         version: 9.35.0(jiti@2.5.1)
       eslint-plugin-react-hooks:
         specifier: ^5.2.0
@@ -58,7 +61,7 @@ importers:
         specifier: ^0.4.20
         version: 0.4.20(eslint@9.35.0(jiti@2.5.1))
       globals:
-        specifier: ^16.3.0
+        specifier: ^16.4.0
         version: 16.4.0
       prettier:
         specifier: ^3.6.2
@@ -70,10 +73,10 @@ importers:
         specifier: ~5.8.3
         version: 5.8.3
       typescript-eslint:
-        specifier: ^8.39.1
+        specifier: ^8.44.0
         version: 8.44.0(eslint@9.35.0(jiti@2.5.1))(typescript@5.8.3)
       vite:
-        specifier: ^7.1.2
+        specifier: ^7.1.5
         version: 7.1.5(@types/node@24.4.0)(jiti@2.5.1)(lightningcss@1.30.1)
 
 packages:
