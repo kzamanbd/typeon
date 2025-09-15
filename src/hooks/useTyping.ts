@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import errorSoundFile from '../assets/error-sound.mp3';
 import type { TypingState, TypingStats } from '../types';
 import { analyzeTyping, calculateAccuracy, calculateWPM } from '../utils/typingUtils';
 
@@ -24,6 +25,20 @@ export const useTyping = ({ text, onComplete, onProgress }: UseTypingProps) => {
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
     const onProgressRef = useRef(onProgress);
     const onCompleteRef = useRef(onComplete);
+    const errorAudioRef = useRef<HTMLAudioElement | null>(null);
+
+    // Initialize error sound
+    useEffect(() => {
+        errorAudioRef.current = new Audio(errorSoundFile);
+        errorAudioRef.current.volume = 0.3; // Set volume to 30%
+        errorAudioRef.current.preload = 'auto';
+
+        return () => {
+            if (errorAudioRef.current) {
+                errorAudioRef.current = null;
+            }
+        };
+    }, []);
 
     // Update refs when callbacks change
     useEffect(() => {
@@ -164,6 +179,23 @@ export const useTyping = ({ text, onComplete, onProgress }: UseTypingProps) => {
                 userInput: input,
                 currentPosition: input.length,
             };
+
+            // Check if the last typed character is incorrect and play error sound
+            if (input.length > prev.userInput.length) {
+                const lastCharIndex = input.length - 1;
+                const expectedChar = prev.currentText[lastCharIndex];
+                const typedChar = input[lastCharIndex];
+
+                if (expectedChar && typedChar && expectedChar !== typedChar) {
+                    // Play error sound for incorrect character
+                    if (errorAudioRef.current) {
+                        errorAudioRef.current.currentTime = 0; // Reset to start
+                        errorAudioRef.current.play().catch(e => {
+                            console.warn('Could not play error sound:', e);
+                        });
+                    }
+                }
+            }
 
             // Auto-start typing on first character
             if (!prev.isActive && input.length === 1 && !prev.startTime) {
