@@ -1,5 +1,4 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import './App.css';
 import { Navigation } from './components/Navigation';
 import { ProgressProvider } from './contexts/ProgressContext';
 import { HomePage } from './pages/HomePage';

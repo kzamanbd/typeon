@@ -57,7 +57,7 @@ export const TypingArea: React.FC<TypingAreaProps> = ({ text, userInput, onInput
         <div className={`relative ${className}`}>
             {/* Display Text */}
             <div className='mb-4 min-h-[120px] rounded-lg border-2 border-gray-200 bg-gray-50 p-6'>
-                <div className='font-mono text-lg leading-relaxed tracking-wide'>{renderText()}</div>
+                <div className='flex flex-wrap font-mono text-lg leading-relaxed tracking-wide'>{renderText()}</div>
             </div>
 
             {/* Input Area */}
