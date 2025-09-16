@@ -9,6 +9,7 @@ import { LessonsPage } from './pages/LessonsPage';
 import { LoginPage } from './pages/LoginPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PracticePage } from './pages/PracticePage';
+import { PricingPage } from './pages/PricingPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { StatisticsPage } from './pages/StatisticsPage';
 
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
             {
                 path: 'settings',
                 element: <SettingsPage />,
+            },
+            {
+                path: 'pricing',
+                element: <PricingPage />,
             },
         ],
     },
