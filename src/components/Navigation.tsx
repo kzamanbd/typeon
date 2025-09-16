@@ -3,19 +3,29 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
+interface NavItem {
+    path: string;
+    label: string;
+    icon: React.ComponentType<{ size?: number }>;
+    requiresAuth?: boolean;
+}
+
 export const Navigation: React.FC = () => {
     const location = useLocation();
     const { user, logout, isAuthenticated } = useAuth();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    const navItems = [
+    const allNavItems: NavItem[] = [
         { path: '/', label: 'Home', icon: Home },
         { path: '/lessons', label: 'Lessons', icon: BookOpen },
         { path: '/practice', label: 'Practice', icon: Play },
         { path: '/stats', label: 'Statistics', icon: BarChart3 },
         { path: '/pricing', label: 'Pricing', icon: DollarSign },
-        { path: '/settings', label: 'Settings', icon: Settings },
+        { path: '/settings', label: 'Settings', icon: Settings, requiresAuth: true },
     ];
+
+    // Filter navigation items based on authentication status
+    const navItems = allNavItems.filter(item => !item.requiresAuth || isAuthenticated);
 
     const isActive = (path: string) => {
         return location.pathname === path;
